@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مسابقة كيان تحيا مصر - علاقات عامة</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;                                            
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            user-select: none;
+        }
+        .navbar {
+            background-color: #d32f2f;
+            padding: 10px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        .btn {
+            background-color: #d32f2f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .logo {
+            width: 150px;
+            margin: 20px auto;
+            display: block;
+        }
+        #loading {
+            display: none;
+            margin-top: 10px;
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <img src="/mnt/data/1740787110046.png" alt="لوجو اتحاد طلاب تحيا مصر" class="logo">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#home">الرئيسية</a>
+            <a class="navbar-brand" href="#contest">المسابقة</a>
+            <a class="navbar-brand" href="#contact">تواصل معنا</a>
+        </div>
+    </nav>
+
+
+    <section id="home" class="container text-center my-5">
+        <h1>مرحبًا في مسابقة كيان تحيا مصر</h1>
+        <p>شارك في المسابقة!</p>
+        <a href="#contest" class="btn">ابدأ الآن</a>
+    </section>
+
+
+    <section id="contest" class="container my-5">
+        <h2>أسئلة المسابقة</h2>
+        <form id="contestForm" class="row g-3">
+            <div class="col-12">
+                <input type="text" class="form-control" name="name" placeholder="الاسم ثلاثي" required>
+            </div>
+            <div class="col-12">
+                <input type="text" class="form-control" name="phone" placeholder="رقم الهاتف" required>
+            </div>
+            <div class="col-12">
+                <input type="text" class="form-control" name="city" placeholder="المحافظة" required>
+            </div>
+           
+            <div class="col-12">
+                <label class="form-label">في أي سنة فرض صيام رمضان؟</label>
+                <input type="text" class="form-control" name="q1" required>
+            </div>
+            <div class="col-12">
+                <label class="form-label">ما هو أول سنة صام فيها المسلمون رمضان؟</label>
+                <input type="text" class="form-control" name="q2" required>
+            </div>
+            <div class="col-12">
+                <label class="form-label">ما هي السورة التي نزلت فيها آية الصيام؟</label>
+                <input type="text" class="form-control" name="q3" required>
+            </div>
+            <div class="col-12">
+                <label class="form-label">ما هو حكم صيام المريض الذي يعاني من مرض مزمن؟</label>
+                <input type="text" class="form-control" name="q4" required>
+            </div>
+            <div class="col-12">
+                <label class="form-label">ما هو معنى "القدر" في ليلة القدر؟</label>
+                <input type="text" class="form-control" name="q5" required>
+            </div>
+            <div class="col-12">
+                <label class="form-label">ما هي الأحكام الخاصة بالمسافر في رمضان؟</label>
+                <input type="text" class="form-control" name="q6" required>
+            </div>
+            <div class="col-12">
+                <label class="form-label">ما هو حكم من نوى الإفطار في رمضان ثم تراجع؟</label>
+                <input type="text" class="form-control" name="q7" required>
+            </div>
+            <div class="col-12">
+                <label class="form-label">ما هي الآية التي تتحدث عن "المسارعة في الخيرات"؟</label>
+                <input type="text" class="form-control" name="q8" required>
+            </div>
+            <div class="col-12">
+                <label class="form-label">كيف يمكن تحديد ليلة القدر باستخدام معايير علمية؟</label>
+                <input type="text" class="form-control" name="q9" required>
+            </div>
+            <div class="col-12">
+                <label class="form-label">كم عدد مرات ذكر شهر رمضان في القرآن الكريم؟</label>
+                <input type="text" class="form-control" name="q10" required>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn">إرسال الإجابات</button>
+                <p id="loading">جارٍ إرسال الإجابات...</p>
+            </div>
+        </form>
+    </section>
+
+
+    <section id="contact" class="container text-center my-5">
+        <h2>تواصل معنا</h2>
+        <p>يمكنك التواصل معنا عبر الهاتف: 01200161480</p>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+document.getElementById("contestForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+   
+    let formData = new FormData(this);
+    let object = {};
+    formData.forEach((value, key) => object[key] = value);
+    let json = JSON.stringify(object);
+   
+    console.log("إرسال البيانات:", json);
+   
+    fetch("https://script.google.com/macros/s/AKfycbzmHZoJLhRmvaxcvtYEagdmUAo6IovMu2hczkEtvVfhk-MYBgkn4earjhvkDpKJWv1X4A/exec ", {
+        method: "POST",
+        mode: "no-cors", // حل مشكلة CORS
+        headers: { "Content-Type": "application/json" },
+        body: json
+    })
+    .then(() => {
+        alert("تم إرسال الإجابات بنجاح!");
+        document.getElementById("contestForm").reset();
+    })
+    .catch(error => {
+        console.error("خطأ في الإرسال:", error);
+        alert("حدث خطأ أثناء الإرسال، حاول مرة أخرى.");
+    });
+});
+    </script>
+</body>
+</html>
