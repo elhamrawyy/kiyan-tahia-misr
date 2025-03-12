@@ -1,160 +1,740 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مسابقة كيان تحيا مصر - علاقات عامة</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
+        :root {
+            --primary-color: #e50914;
+            --secondary-color: #b30710;
+            --accent-color: #ffd700;
+            --dark-color: #121212;
+            --light-color: #f8f8f8;
+            --gray-color: #333333;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --error-color: #e74c3c;
+        }
+        
         body {
-            font-family: Arial, sans-serif;                                            
-            background-color: #000;
-            color: #fff;
-            text-align: center;
+            font-family: 'Segoe UI', 'Cairo', sans-serif;
+            background-color: var(--dark-color);
+            color: var(--light-color);
             user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            overflow-x: hidden;
         }
-        .navbar {
-            background-color: #d32f2f;
-            padding: 10px;
+        
+        /* Card styling */
+        .tm-card {
+            background-color: rgba(30, 30, 30, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 25px;
+            border-left: 4px solid var(--primary-color);
+            backdrop-filter: blur(10px);
         }
-        .navbar a {
+        
+        .tm-card:hover {
+            box-shadow: 0 8px 30px rgba(229, 9, 20, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        /* Navbar styling */
+        .tm-navbar {
+            background-color: rgba(0, 0, 0, 0.9);
             color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .tm-navbar-brand {
+            color: white;
+            font-weight: 600;
             text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
+            padding: 10px 18px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .btn {
-            background-color: #d32f2f;
+        
+        .tm-navbar-brand:hover {
+            background-color: rgba(229, 9, 20, 0.2);
             color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
         }
-        .logo {
-            width: 150px;
-            margin: 20px auto;
+        
+        .tm-navbar-brand.active {
+            background-color: var(--primary-color);
+        }
+        
+        .tm-navbar-brand.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 3px;
+        }
+        
+        /* Hero section */
+        .tm-hero {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(229, 9, 20, 0.8)), url('/api/placeholder/1200/600') center/cover no-repeat;
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--primary-color);
+        }
+        
+        .tm-hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, transparent 20%, var(--dark-color) 70%), 
+                        radial-gradient(circle, transparent 20%, var(--dark-color) 70%) 50px 50px;
+            background-size: 30px 30px;
+            opacity: 0.1;
+            animation: backgroundMove 30s linear infinite;
+        }
+        
+        @keyframes backgroundMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .tm-hero h1 {
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 3rem;
+        }
+        
+        .tm-hero p {
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+        }
+        
+        /* Button styling */
+        .tm-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
+        }
+        
+        .tm-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .tm-btn:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .tm-btn:active::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(30, 30);
+                opacity: 0;
+            }
+        }
+        
+        .tm-btn-accent {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+        }
+        
+        .tm-btn-accent:hover {
+            background-color: #e5c100;
+            color: var(--dark-color);
+        }
+        
+        /* Form styling */
+        .tm-form-control {
+            display: block;
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .tm-form-control:focus {
+            border-color: var(--primary-color);
+            outline: 0;
+            box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.25);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .tm-form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .tm-form-label {
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--light-color);
+            font-size: 1.1rem;
+        }
+        
+        /* Section headers */
+        .tm-section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+            position: relative;
+        }
+        
+        .tm-section-header::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 30%;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .tm-section-header h2 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 28px;
+            color: var(--accent-color);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tm-section-header-icon {
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            box-shadow: 0 4px 10px rgba(229, 9, 20, 0.4);
+        }
+        
+        /* Timer styling */
+        .tm-timer {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.4s ease;
+            direction: ltr;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 9, 20, 0.4);
+        }
+        
+        .tm-timer-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 4px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
+        }
+        
+        .tm-timer-circle svg {
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            width: 70px;
+            height: 70px;
+            transform: rotate(-90deg);
+        }
+        
+        .tm-timer-circle svg circle {
+            fill: none;
+            stroke: var(--accent-color);
+            stroke-width: 4;
+            stroke-dasharray: 200; /* 2πr, where r = 32 */
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 1s linear;
+        }
+        
+        .tm-timer-value {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--light-color);
+            text-shadow: 0 0 10px rgba(229, 9, 20, 0.7);
+        }
+        
+        .tm-timer-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .tm-timer.warning .tm-timer-value {
+            color: var(--warning-color);
+        }
+        
+        .tm-timer.warning .tm-timer-circle {
+            border-color: var(--warning-color);
+        }
+        
+        .tm-timer.warning svg circle {
+            stroke: var(--warning-color);
+        }
+        
+        .tm-timer.danger .tm-timer-value {
+            color: var(--error-color);
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .tm-timer.danger .tm-timer-circle {
+            border-color: var(--error-color);
+        }
+        
+        .tm-timer.danger svg circle {
+            stroke: var(--error-color);
+        }
+        
+        /* Question box */
+        .tm-question-box {
+            background-color: rgba(30, 30, 30, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(5px);
+        }
+        
+        .tm-question-box:hover {
+            box-shadow: 0 8px 30px rgba(229, 9, 20, 0.3);
+            transform: translateY(-5px) scale(1.02);
+        }
+        
+        .tm-question-box .tm-form-label {
+            display: flex;
+            align-items: center;
+        }
+        
+        .tm-question-box .tm-form-label .number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(229, 9, 20, 0.4);
+        }
+        
+        /* Success message */
+        .tm-message {
+            display: none;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            animation: fadeInUp 0.5s ease;
+            text-align: center;
+        }
+        
+        .tm-success-message {
+            background-color: rgba(46, 204, 113, 0.2);
+            border: 2px solid var(--success-color);
+        }
+        
+        .tm-warning-message {
+            background-color: rgba(243, 156, 18, 0.2);
+            border: 2px solid var(--warning-color);
+        }
+        
+        .tm-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
             display: block;
         }
-        #loading {
+        
+        .tm-confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1500;
+        }
+        
+        /* Footer */
+        .tm-footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 4px solid var(--primary-color);
+            position: relative;
+        }
+        
+        .tm-footer a {
+            color: white;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .tm-footer a:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+        
+        /* Loading */
+        .tm-loading {
             display: none;
-            margin-top: 10px;
-            color: yellow;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .tm-loading-spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(229, 9, 20, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Modal */
+        .tm-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .tm-modal-content {
+            background-color: rgba(30, 30, 30, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 2px solid var(--primary-color);
+            animation: modalIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes modalIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        .tm-modal-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        /* Animation classes */
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse-animation 2s infinite;
+        }
+        
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(229, 9, 20, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(229, 9, 20, 0); }
+        }
+        
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .tm-timer {
+                top: auto;
+                bottom: 20px;
+                left: 20px;
+            }
+            
+            .tm-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .tm-hero p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
+
 <body>
-    <img src="/mnt/data/1740787110046.png" alt="لوجو اتحاد طلاب تحيا مصر" class="logo">
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <!-- Navbar -->
+    <nav class="tm-navbar animate__animated animate__fadeInDown">
         <div class="container">
-            <a class="navbar-brand" href="#home">الرئيسية</a>
-            <a class="navbar-brand" href="#contest">المسابقة</a>
-            <a class="navbar-brand" href="#contact">تواصل معنا</a>
+            <div class="d-flex justify-content-center">
+                <a class="tm-navbar-brand active" href="#home">
+                    <i class="fas fa-home ms-1"></i> الرئيسية
+                </a>
+                <a class="tm-navbar-brand" href="#contest">
+                    <i class="fas fa-trophy ms-1"></i> المسابقة
+                </a>
+                <a class="tm-navbar-brand" href="#contact">
+                    <i class="fas fa-envelope ms-1"></i> تواصل معنا
+                </a>
+            </div>
         </div>
     </nav>
 
+    <!-- Timer -->
+    <div class="tm-timer pulse">
+        <div class="tm-timer-circle">
+            <svg>
+                <circle cx="34" cy="34" r="32"></circle>
+            </svg>
+            <span class="tm-timer-value">4:00</span>
+        </div>
+        <span class="tm-timer-label">⏱️ الوقت المتبقي</span>
+    </div>
 
-    <section id="home" class="container text-center my-5">
-        <h1>مرحبًا في مسابقة كيان تحيا مصر</h1>
-        <p>شارك في المسابقة!</p>
-        <a href="#contest" class="btn">ابدأ الآن</a>
+    <!-- Hero Section -->
+    <section id="home" class="tm-hero">
+        <div class="container text-center">
+            <h1 class="animate__animated animate__fadeInDown">🌙 مرحبًا في مسابقة كيان تحيا مصر 🌙</h1>
+            <p class="animate__animated animate__fadeIn animate__delay-1s">شارك في المسابقة واختبر معلوماتك الدينية عن شهر رمضان المبارك، وكن من الفائزين بجوائز قيمة! ✨</p>
+            <a href="#contest" class="tm-btn tm-btn-accent animate__animated animate__pulse animate__infinite float">
+                <i class="fas fa-play-circle ms-2"></i> ابدأ المسابقة الآن 🚀
+            </a>
+        </div>
     </section>
 
-
-    <section id="contest" class="container my-5">
-        <h2>أسئلة المسابقة</h2>
-        <form id="contestForm" class="row g-3">
-            <div class="col-12">
-                <input type="text" class="form-control" name="name" placeholder="الاسم ثلاثي" required>
+    <!-- Contest Section -->
+    <section id="contest" class="container animate__animated animate__fadeIn">
+        <div class="tm-section-header">
+            <div class="tm-section-header-icon">
+                <i class="fas fa-trophy"></i>
             </div>
-            <div class="col-12">
-                <input type="text" class="form-control" name="phone" placeholder="رقم الهاتف" required>
+            <h2>✨ أسئلة المسابقة ✨</h2>
+        </div>
+        
+        <p class="mb-4">أجب على الأسئلة التالية لتشارك في المسابقة والفوز بالجوائز القيمة. لديك 4 دقائق فقط لإكمال المسابقة. أجب بسرعة ودقة! 👍</p>
+        
+        <form id="contestForm" class="row g-4">
+            <!-- Personal Info -->
+            <div class="col-md-4">
+                <div class="tm-question-box animate__animated animate__fadeInUp">
+                    <label class="tm-form-label">
+                        <i class="fas fa-user-circle ms-2"></i> الاسم الثلاثي
+                    </label>
+                    <input type="text" class="tm-form-control" name="name" placeholder="ادخل اسمك كاملاً" required>
+                </div>
             </div>
-            <div class="col-12">
-                <input type="text" class="form-control" name="city" placeholder="المحافظة" required>
+            
+            <div class="col-md-4">
+                <div class="tm-question-box animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
+                    <label class="tm-form-label">
+                        <i class="fas fa-phone-alt ms-2"></i> رقم الهاتف
+                    </label>
+                    <input type="text" class="tm-form-control" name="phone" placeholder="ادخل رقم هاتفك" required>
+                </div>
             </div>
-           
-            <div class="col-12">
-                <label class="form-label">في أي سنة فرض صيام رمضان؟</label>
-                <input type="text" class="form-control" name="q1" required>
+            
+            <div class="col-md-4">
+                <div class="tm-question-box animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+                    <label class="tm-form-label">
+                        <i class="fas fa-map-marker-alt ms-2"></i> المحافظة
+                    </label>
+                    <input type="text" class="tm-form-control" name="city" placeholder="ادخل محافظتك" required>
+                </div>
             </div>
-            <div class="col-12">
-                <label class="form-label">ما هو أول سنة صام فيها المسلمون رمضان؟</label>
-                <input type="text" class="form-control" name="q2" required>
+            
+            <!-- Questions -->
+            <div class="col-md-6">
+                <div class="tm-question-box animate__animated animate__fadeInRight">
+                    <label class="tm-form-label">
+                        <span class="number">1</span> في أي سنة فرض صيام رمضان؟ 📅
+                    </label>
+                    <input type="text" class="tm-form-control" name="q1" placeholder="أدخل إجابتك هنا" required>
+                </div>
             </div>
-            <div class="col-12">
-                <label class="form-label">ما هي السورة التي نزلت فيها آية الصيام؟</label>
-                <input type="text" class="form-control" name="q3" required>
+            
+            <div class="col-md-6">
+                <div class="tm-question-box animate__animated animate__fadeInLeft">
+                    <label class="tm-form-label">
+                        <span class="number">2</span> ما هو أول سنة صام فيها المسلمون رمضان؟ 🕌
+                    </label>
+                    <input type="text" class="tm-form-control" name="q2" placeholder="أدخل إجابتك هنا" required>
+                </div>
             </div>
-            <div class="col-12">
-                <label class="form-label">ما هو حكم صيام المريض الذي يعاني من مرض مزمن؟</label>
-                <input type="text" class="form-control" name="q4" required>
+            
+            <div class="col-md-6">
+                <div class="tm-question-box animate__animated animate__fadeInRight" style="animation-delay: 0.2s">
+                    <label class="tm-form-label">
+                        <span class="number">3</span> ما هي السورة التي نزلت فيها آية الصيام؟ 📖
+                    </label>
+                    <input type="text" class="tm-form-control" name="q3" placeholder="أدخل إجابتك هنا" required>
+                </div>
             </div>
-            <div class="col-12">
-                <label class="form-label">ما هو معنى "القدر" في ليلة القدر؟</label>
-                <input type="text" class="form-control" name="q5" required>
+            
+            <div class="col-md-6">
+                <div class="tm-question-box animate__animated animate__fadeInLeft" style="animation-delay: 0.2s">
+                    <label class="tm-form-label">
+                        <span class="number">4</span> ما هو حكم صيام المريض الذي يعاني من مرض مزمن؟ 🏥
+                    </label>
+                    <input type="text" class="tm-form-control" name="q4" placeholder="أدخل إجابتك هنا" required>
+                </div>
             </div>
-            <div class="col-12">
-                <label class="form-label">ما هي الأحكام الخاصة بالمسافر في رمضان؟</label>
-                <input type="text" class="form-control" name="q6" required>
+            
+            <div class="col-md-6">
+                <div class="tm-question-box animate__animated animate__fadeInRight" style="animation-delay: 0.3s">
+                    <label class="tm-form-label">
+                        <span class="number">5</span> ما هو معنى "القدر" في ليلة القدر؟ ✨
+                    </label>
+                    <input type="text" class="tm-form-control" name="q5" placeholder="أدخل إجابتك هنا" required>
+                </div>
             </div>
-            <div class="col-12">
-                <label class="form-label">ما هو حكم من نوى الإفطار في رمضان ثم تراجع؟</label>
-                <input type="text" class="form-control" name="q7" required>
+            
+            <div class="col-md-6">
+                <div class="tm-question-box animate__animated animate__fadeInLeft" style="animation-delay: 0.3s">
+                    <label class="tm-form-label">
+                        <span class="number">6</span> ما هي الأحكام الخاصة بالمسافر في رمضان؟ ✈️
+                    </label>
+                    <input type="text" class="tm-form-control" name="q6" placeholder="أدخل إجابتك هنا" required>
+                </div>
             </div>
-            <div class="col-12">
-                <label class="form-label">ما هي الآية التي تتحدث عن "المسارعة في الخيرات"؟</label>
-                <input type="text" class="form-control" name="q8" required>
+            
+            <div class="col-md-6">
+                <div class="tm-question-box animate__animated animate__fadeInRight" style="animation-delay: 0.4s">
+                    <label class="tm-form-label">
+                        <span class="number">7</span> ما هو حكم من نوى الإفطار في رمضان ثم تراجع؟ 🤔
+                    </label>
+                    <input type="text" class="tm-form-control" name="q7" placeholder="أدخل إجابتك هنا" required>
+                </div>
             </div>
-            <div class="col-12">
-                <label class="form-label">كيف يمكن تحديد ليلة القدر باستخدام معايير علمية؟</label>
-                <input type="text" class="form-control" name="q9" required>
+            
+            <div class="col-md-6">
+                <div class="tm-question-box animate__animated animate__fadeInLeft" style="animation-delay: 0.4s">
+                    <label class="tm-form-label">
+                        <span class="number">8</span> ما هي الآية التي تتحدث عن "المسارعة في الخيرات"؟ 🏃‍♂️
+                    </label>
+                    <input type="text" class="tm-form-control" name="q8" placeholder="أدخل إجابتك هنا" required>
+                </div>
             </div>
-            <div class="col-12">
-                <label class="form-label">كم عدد مرات ذكر شهر رمضان في القرآن الكريم؟</label>
-                <input type="text" class="form-control" name="q10" required>
+            
+            <div class="col-md-6">
+                <div class="tm-question-box animate__animated animate__fadeInRight" style="animation-delay: 0.5s">
+                    <label class="tm-form-label">
+                        <span class="number">9</span> كيف يمكن تحديد ليلة القدر باستخدام معايير علمية؟ 🔍
+                    </label>
+                    <input type="text" class="tm-form-control" name="q9" placeholder="أدخل إجابتك هنا" required>
+                </div>
             </div>
-            <div class="col-12">
-                <button type="submit" class="btn">إرسال الإجابات</button>
-                <p id="loading">جارٍ إرسال الإجابات...</p>
+            
+            <div class="col-md-6">
+                <div class="tm-question-box animate__animated animate__fadeInLeft" style="animation-delay: 0.5s">
+                    <label class="tm-form-label">
+                        <span class="number">10</span> كم عدد مرات ذكر شهر رمضان في القرآن الكريم؟ 🔢
+                    </label>
+                    <input type="text" class="tm-form-control" name="q10" placeholder="أدخل إجابتك هنا" required>
+                </div>
             </div>
-        </form>
-    </section>
-
-
-    <section id="contact" class="container text-center my-5">
-        <h2>تواصل معنا</h2>
-        <p>يمكنك التواصل معنا عبر الهاتف: 01200161480</p>
-    </section>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-document.getElementById("contestForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-   
-    let formData = new FormData(this);
-    let object = {};
-    formData.forEach((value, key) => object[key] = value);
-    let json = JSON.stringify(object);
-   
-    console.log("إرسال البيانات:", json);
-   
-    fetch("https://script.google.com/macros/s/AKfycbzmHZoJLhRmvaxcvtYEagdmUAo6IovMu2hczkEtvVfhk-MYBgkn4earjhvkDpKJWv1X4A/exec ", {
-        method: "POST",
-        mode: "no-cors", // حل مشكلة CORS
-        headers: { "Content-Type": "application/json" },
-        body: json
-    })
-    .then(() => {
-        alert("تم إرسال الإجابات بنجاح!");
-        document.getElementById("contestForm").reset();
-    })
-    .catch(error => {
-        console.error("خطأ في الإرسال:", error);
-        alert("حدث خطأ أثناء الإرسال، حاول مرة أخرى.");
-    });
-});
-    </script>
-</body>
-</html>
+            
+            <!-- Submit Button -->
+            <div class="col-12 text-center">
+                <button type="submit" class="tm-btn mt-4 animate__animated animate__heartBeat animate__delay-2s">
+                    <i class="fas fa-paper-plane ms-2"></i> إرسال الإجابات 📤
+                </button>
+                
+                <div class="tm-loading" id="loading">
