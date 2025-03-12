@@ -476,7 +476,7 @@
             border-radius: 50%;
             border-top-color: var(--primary-color);
             animation: spin 1s ease-in-out infinite;
-            margin-left: 10px;
+            margin-right: 10px;
         }
         
         @keyframes spin {
@@ -594,9 +594,7 @@
         <div class="container text-center">
             <h1 class="animate__animated animate__fadeInDown">🌙 مرحبًا في مسابقة كيان تحيا مصر 🌙</h1>
             <p class="animate__animated animate__fadeIn animate__delay-1s">شارك في المسابقة واختبر معلوماتك الدينية عن شهر رمضان المبارك، وكن من الفائزين بجوائز قيمة! ✨</p>
-            <a href="#contest" class="tm-btn tm-btn-accent animate__animated animate__pulse animate__infinite float">
-                <i class="fas fa-play-circle ms-2"></i> ابدأ المسابقة الآن 🚀
-            </a>
+            <!-- Start Contest Button Removed as Requested -->
         </div>
     </section>
 
@@ -737,4 +735,65 @@
                     <i class="fas fa-paper-plane ms-2"></i> إرسال الإجابات 📤
                 </button>
                 
+                <!-- Loading Spinner -->
                 <div class="tm-loading" id="loading">
+                    <div class="tm-loading-spinner"></div>
+                    <span>جاري إرسال إجاباتك...</span>
+                </div>
+                
+                <!-- Success Message -->
+                <div class="tm-message tm-success-message" id="successMessage">
+                    <span class="tm-emoji">✅</span>
+                    <h3>تم إرسال إجاباتك بنجاح!</h3>
+                    <!-- Your existing HTML -->
+
+<!-- Loading Message -->
+<div id="loadingMessage" style="display: none;">
+    <span>جاري إرسال إجاباتك...</span>
+</div>
+
+<!-- Success Message -->
+<div class="tm-message tm-success-message" id="successMessage" style="display: none;">
+    <span class="tm-emoji">✅</span>
+    <h3>تم إرسال إجاباتك بنجاح!</h3>
+</div>
+
+<!-- Button for submitting the form -->
+<button id="submitBtn">إرسال الإجابات</button>
+
+<script>
+    document.getElementById('submitBtn').addEventListener('click', function() {
+        // Show loading message
+        document.getElementById('loadingMessage').style.display = 'block';
+
+        // Collect data from your form
+        var data = {
+            name: "أحمد مصطفى",   // اسم المستخدم (يمكنك جمعه من الفورم)
+            email: "ahmed@example.com",  // البريد الإلكتروني
+            q1: "إجابة السؤال 1",   // الإجابة 1
+            q2: "إجابة السؤال 2"    // الإجابة 2
+        };
+
+        // Send the data to your server
+        fetch('http://localhost:5000/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            // Hide loading message
+            document.getElementById('loadingMessage').style.display = 'none';
+
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+        })
+        .catch(error => {
+            // Hide loading message and show error (optional)
+            document.getElementById('loadingMessage').style.display = 'none';
+            alert('حدث خطأ أثناء إرسال الإجابات. حاول مرة أخرى.');
+        });
+    });
+</script>
